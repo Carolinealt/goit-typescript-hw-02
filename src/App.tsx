@@ -43,7 +43,7 @@ function App() {
     fetchImg();
   }, [page, query, setIsLoading, setError]);
 
-  const handleQuerry = (newQuery) => {
+  const handleQuerry = (newQuery: string) => {
     setImagesList([]);
     setQuery(newQuery);
     setPage(1);
