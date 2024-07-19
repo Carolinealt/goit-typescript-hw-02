@@ -1,12 +1,20 @@
 import Modal from "react-modal";
 import css from "./ImageModal.module.css";
+import { ModalData } from "../../types";
+import { FC } from "react";
 Modal.setAppElement("#root");
 
-const ImageModal = ({
+interface ImageModalProps {
+  isOpen: boolean;
+  toClose: () => void;
+  toOpen: () => void;
+  modalData: ModalData;
+}
+
+const ImageModal: FC<ImageModalProps> = ({
   isOpen,
   toClose,
-  handleAfterOpenFunc,
-  imageToShow: { src, alt, location, desc, likes },
+  modalData: { src, alt, location, desc, likes },
 }) => {
   return (
     <>
@@ -15,7 +23,6 @@ const ImageModal = ({
         shouldCloseOnEsc={true}
         className={css.modal}
         overlayClassName={css.overlay}
-        onAfterOpen={handleAfterOpenFunc}
       >
         <img className={css.fullImg} src={src} alt={alt} />
         <div className={css.desc}>

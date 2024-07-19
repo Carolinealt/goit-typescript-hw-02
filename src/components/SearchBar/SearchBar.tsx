@@ -1,14 +1,15 @@
 import toast from "react-hot-toast";
 import css from "./SearchBar.module.css";
+import { FormEvent } from "react";
 
 const SearchBar = ({ func }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (e.target.elements.querry.value.trim() === "") {
+    if (e.target.elements.query.value.trim() === "") {
       toast("enter valid value");
       return;
     }
-    const query = e.target.elements.querry.value.trim();
+    const query: string = e.target.elements.query.value.trim();
     func(query);
   };
   return (
@@ -20,7 +21,7 @@ const SearchBar = ({ func }) => {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            name="querry"
+            name="query"
             className={css.input}
           />
           <button className={css.searchBtn} type="submit">

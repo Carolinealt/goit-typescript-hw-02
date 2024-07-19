@@ -8,16 +8,25 @@ import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
+import { HugeDataImg, ModalData } from "./types";
 
 function App() {
-  const [imagesList, setImagesList] = useState([]);
-  const [currentImage, setCurrentImage] = useState({});
-  const [isLoasding, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [imgData, setImgData] = useState({});
+  const [imagesList, setImagesList] = useState<HugeDataImg[]>([]);
+  const [currentImage, setCurrentImage] = useState<HTMLImageElement | null>(
+    null
+  );
+  const [isLoasding, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>("");
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [modalData, setModalData] = useState<ModalData>({
+    src: "",
+    alt: "",
+    likes: 0,
+    location: "",
+    desc: "",
+  });
 
   const handleBtnLoadMore = () => {
     setPage(page + 1);
@@ -64,7 +73,7 @@ function App() {
       {imagesList.length > 0 && (
         <ImageGallery
           images={imagesList}
-          setImgData={setImgData}
+          setImgData={setModalData}
           setCurrentImage={setCurrentImage}
           handleOpenModal={handleOpenModal}
         />
@@ -74,12 +83,12 @@ function App() {
       )}
       {isLoasding && <Loader />}
       <Toaster />
-      {currentImage.src && (
+      {currentImage && (
         <ImageModal
           toOpen={handleOpenModal}
           isOpen={modalIsOpen}
           toClose={handleCloseModal}
-          imageToShow={currentImage}
+          modalData={modalData}
         />
       )}
     </>

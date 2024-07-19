@@ -1,6 +1,13 @@
+import { FC } from "react";
+import { ImageCardProps, ImgData } from "../../types";
 import css from "./ImageCard.module.css";
 
-const ImageCard = ({ image, setImgData, setCurrentImage, handleOpenModal }) => {
+const ImageCard: FC<ImageCardProps> = ({
+  image,
+  setImgData,
+  setCurrentImage,
+  handleOpenModal,
+}) => {
   const handle = (e) => {
     const imgData = {
       src: image.urls.full,
@@ -9,10 +16,12 @@ const ImageCard = ({ image, setImgData, setCurrentImage, handleOpenModal }) => {
       location: image.user.location,
       desc: image.alt_description,
     };
+
     setImgData(imgData);
-    setCurrentImage(e.target);
+    setCurrentImage(e.target as HTMLImageElement);
     handleOpenModal(true);
   };
+
   return (
     <div className={css.container}>
       <img
