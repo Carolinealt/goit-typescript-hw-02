@@ -13,7 +13,7 @@ const ImageCard: FC<ImageCardProps> = ({
       src: image.urls.full,
       alt: image.alternative_slugs.en,
       likes: image.likes,
-      location: image.user.location,
+      location: image.user.location || "unknow",
       desc: image.alt_description,
     };
 
