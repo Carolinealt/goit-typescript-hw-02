@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { ImageCardProps, ImgData } from "../../types";
+import React, { FC } from "react";
+import { ImageCardProps } from "../../types";
 import css from "./ImageCard.module.css";
 
 const ImageCard: FC<ImageCardProps> = ({
@@ -8,7 +8,7 @@ const ImageCard: FC<ImageCardProps> = ({
   setCurrentImage,
   handleOpenModal,
 }) => {
-  const handle = (e) => {
+  const handle = (e: React.MouseEvent<HTMLImageElement>) => {
     const imgData = {
       src: image.urls.full,
       alt: image.alternative_slugs.en,
