@@ -37,7 +37,9 @@ function App() {
       try {
         setError(false);
         setIsLoading(true);
-        const data = await getImages(query, page);
+        const data: HugeDataImg[] = await getImages(query, page);
+        console.log(data);
+
         setImagesList((prevAr) =>
           page > 1 ? [...prevAr, ...data] : [...data]
         );
